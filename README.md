@@ -20,7 +20,11 @@ pandoc writing/_drafts/my-first-post.md --standalone --template=writing/_templat
 
 每次修改草稿后重新运行最后一行。生成的页面地址是 `/writing/my-first-post/`；图片可以放在该文章目录下，在 Markdown 中使用相对路径。发布时还需手动更新 `writing/index.html` 的文章卡片和篇数，并按需更新首页的文章入口。Pandoc 只负责转换和套用页面模板，不会自动维护文章列表。若本机没有 Pandoc，需先安装它才能运行转换命令。
 
-## 更换头像
+## 网站图标
+
+浏览器标签页使用 `assets/site-icon.svg`，iPhone 或 iPad“添加到主屏幕”使用仓库根目录的 `apple-touch-icon.png`（180 × 180 像素）。当前图标是使用本站配色制作的 `x` 标识，四个页面和今后生成的文章页都已引用它。以后更换设计时，同时更新 SVG 与 PNG，保持两处图案一致；发布后若主屏幕仍显示旧图标，可移除旧快捷方式再重新添加。
+
+## 页面中的个人照片
 
 目前首页和关于页都使用纯白的 `assets/avatar-placeholder.svg`。准备一张自己有权使用的正方形照片或插画，裁切时让主体居中，导出为适合网页使用的 `assets/avatar.webp`（或 PNG/JPEG），然后把 `index.html` 与 `about/index.html` 中的头像 `src` 都改为新文件路径，并将 `alt` 改为准确描述。现有样式会分别以 88 × 88 和 112 × 112 像素展示；替换后要在手机宽度和明暗主题下检查裁切效果。
 
