@@ -13,8 +13,8 @@
     root.dataset.theme = theme;
     const isDark = theme === 'dark';
     button.setAttribute('aria-pressed', String(isDark));
-    button.setAttribute('aria-label', isDark ? '切换浅色模式' : '切换深色模式');
-    button.textContent = isDark ? '浅色模式' : '深色模式';
+    button.setAttribute('aria-label', isDark ? '切换至浅色模式' : '切换至深色模式');
+    button.textContent = isDark ? '☀ 浅色' : '◐ 深色';
   }
 
   setTheme(initial);

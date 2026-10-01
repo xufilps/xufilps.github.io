@@ -3,66 +3,79 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="xufilps 的个人作品集，收录项目、写作与个人介绍。">
+  <meta name="description" content="xufilps 的个人作品集：项目、思考与实践记录。">
   <meta name="color-scheme" content="light dark">
-  <title>首页 · xufilps</title>
+  <title>Home · xufilps</title>
   <link rel="stylesheet" href="styles.css">
   <script src="theme.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳至正文</a>
-  <div class="site-wrap" id="top">
+  <div class="site-shell" id="top">
     <header class="site-header">
-      <a class="brand" href="./" aria-label="xufilps，返回首页">xufilps<span aria-hidden="true">.</span></a>
+      <a class="brand" href="./">Home · xufilps</a>
       <nav class="site-nav" aria-label="主导航">
         <a href="./" aria-current="page">首页</a>
-        <a href="projects/">项目</a>
         <a href="writing/">文章</a>
+        <a href="projects/">项目</a>
         <a href="about/">关于</a>
       </nav>
-      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换深色模式" aria-pressed="false" hidden>深色模式</button>
+      <a class="github-nav" href="https://github.com/xufilps" target="_blank" rel="noopener noreferrer" aria-label="xufilps 的 GitHub 主页">GitHub ↗</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换至深色模式" aria-pressed="false" hidden>◐ 深色</button>
     </header>
 
     <main id="main">
-      <section class="hero" aria-labelledby="home-title">
-        <div class="hero-copy">
-          <p class="eyebrow">PERSONAL PORTFOLIO <span aria-hidden="true">/</span> 个人作品集</p>
-          <h1 id="home-title">你好，我是<br><em>xufilps。</em></h1>
-          <p class="hero-lede">这里将展示我的项目、写作与实践过程。个人介绍正在整理，内容会随着真实作品逐步完善。</p>
-          <a class="inline-link" href="about/">了解更多 <span aria-hidden="true">↗</span></a>
+      <section class="compact-intro" aria-labelledby="home-title">
+        <div class="small-portrait" role="img" aria-label="头像尚未提供">x.</div>
+        <div class="identity">
+          <p class="eyebrow">XUFILPS / PERSONAL PORTFOLIO</p>
+          <h1 id="home-title">xufilps</h1>
+          <p class="identity-meta">姓名与个人背景待补充</p>
+          <p class="intro-role">作品、思考与实践记录</p>
         </div>
-        <div class="hero-mark" aria-hidden="true"><span>x.</span><small>作品 / 思考 / 过程</small></div>
+        <a class="contact-pill" href="about/#contact"><span class="status-dot" aria-hidden="true"></span>联系信息 <span aria-hidden="true">↗</span></a>
       </section>
 
       <div class="home-layout">
         <div class="home-primary">
-          <section class="home-section" aria-labelledby="projects-title">
-            <div class="section-heading"><p class="section-index">01 / WORK</p><h2 id="projects-title">代表项目</h2></div>
-            <div class="section-body">
-              <!-- 在这里加入真实的代表项目，包含项目名称、角色、过程、结果和可公开的链接。 -->
-              <div class="empty-feature"><span class="empty-symbol" aria-hidden="true">↗</span><h3>项目展示正在整理</h3><p>完成项目介绍后，这里会优先呈现一件最能说明工作过程的作品。</p></div>
-              <a class="more-link" href="projects/">查看项目页 <span aria-hidden="true">→</span></a>
+          <section class="home-section intro-section" aria-labelledby="about-heading">
+            <div class="section-label"><h2 id="about-heading">关于我</h2></div>
+            <div class="section-content">
+              <p class="intro-text">个人介绍正在整理。这里将说明我关注的方向、参与项目的方式，以及希望通过作品回答的问题。</p>
+              <div class="inline-links"><a href="about/">更多介绍 →</a><a class="github-link" href="https://github.com/xufilps" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
             </div>
           </section>
 
-          <section class="home-section" aria-labelledby="writing-title">
-            <div class="section-heading"><p class="section-index">02 / WRITING</p><h2 id="writing-title">思考记录</h2></div>
-            <div class="section-body">
-              <!-- 有已发布的文章时，在这里加入标题、日期、摘要和指向文章的链接。 -->
-              <p class="quiet-state">文章尚未发布。之后会在这里收录项目复盘、观察与仍在思考的问题。</p>
-              <a class="more-link" href="writing/">浏览文章页 <span aria-hidden="true">→</span></a>
+          <section class="home-section" aria-labelledby="project-heading">
+            <div class="section-label"><h2 id="project-heading">代表项目</h2></div>
+            <div class="section-content">
+              <!-- 用真实项目替换此行：名称、状态、自己的贡献、过程证据、结果和技术或材料。 -->
+              <a class="repo-row" href="projects/">
+                <span class="row-number">01</span>
+                <span class="repo-content"><span class="repo-title"><strong>代表项目待补充</strong><small>尚未发布</small></span><span class="repo-description">完成项目背景、过程和结果的核对后，在这里展示第一件作品。</span><span class="repo-tech">项目介绍准备中</span></span>
+                <span class="row-arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="more-link" href="projects/">查看项目目录 <span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+
+          <section class="home-section" aria-labelledby="essay-heading">
+            <div class="section-label"><h2 id="essay-heading">思考记录</h2></div>
+            <div class="section-content">
+              <!-- 发布真实文章后，在这里加入分类、标题、阅读时间和文章链接。 -->
+              <a class="essay-row" href="writing/"><span class="essay-category">待发布</span><strong>首篇文章正在整理</strong><span class="essay-time">尚未发布</span><span class="row-arrow" aria-hidden="true">↗</span></a>
+              <a class="more-link" href="writing/">浏览文章目录 <span aria-hidden="true">→</span></a>
             </div>
           </section>
         </div>
 
-        <aside class="home-rail" aria-label="个人资料概览">
-          <div class="rail-block"><p class="eyebrow">ABOUT</p><h2>关于我</h2><p>这里将补充我关注的方向、工作的方式，以及做这些项目的原因。</p><a class="inline-link" href="about/">阅读介绍 <span aria-hidden="true">→</span></a></div>
-          <div class="rail-block"><p class="eyebrow">CONTACT</p><h2>保持联系</h2><p>联系方式尚未公开。准备好分享时，会在关于页面提供合适的联系渠道。</p></div>
+        <aside class="home-rail" aria-label="联系概览">
+          <section class="rail-block"><p class="eyebrow">联系信息</p><h2>从作品开始了解我。</h2><p>公开的联系渠道和合作方向尚未补充。准备好后，这里会放入可以直接使用的联系方式。</p><p class="rail-detail">所在地与合作方向：待补充</p><a href="about/#contact">查看联系信息 →</a></section>
         </aside>
       </div>
     </main>
 
-    <footer class="site-footer"><span>xufilps · 个人作品集</span><a href="#top">返回顶部 ↑</a></footer>
+    <footer class="site-footer"><span>© 2026 xufilps · 作品与思考</span><a href="#top">返回顶部 ↑</a></footer>
   </div>
 </body>
 </html>

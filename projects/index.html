@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="xufilps 的项目与作品展示。">
+  <meta name="description" content="xufilps 的项目与作品目录。">
   <meta name="color-scheme" content="light dark">
   <title>项目 · xufilps</title>
   <link rel="stylesheet" href="../styles.css">
@@ -11,28 +11,27 @@
 </head>
 <body>
   <a class="skip-link" href="#main">跳至正文</a>
-  <div class="site-wrap" id="top">
+  <div class="site-shell" id="top">
     <header class="site-header">
-      <a class="brand" href="../" aria-label="xufilps，返回首页">xufilps<span aria-hidden="true">.</span></a>
+      <a class="brand" href="../">Home · xufilps</a>
       <nav class="site-nav" aria-label="主导航">
         <a href="../">首页</a>
-        <a href="./" aria-current="page">项目</a>
         <a href="../writing/">文章</a>
+        <a href="./" aria-current="page">项目</a>
         <a href="../about/">关于</a>
       </nav>
-      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换深色模式" aria-pressed="false" hidden>深色模式</button>
+      <a class="github-nav" href="https://github.com/xufilps" target="_blank" rel="noopener noreferrer" aria-label="xufilps 的 GitHub 主页">GitHub ↗</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换至深色模式" aria-pressed="false" hidden>◐ 深色</button>
     </header>
     <main id="main">
-      <header class="page-intro"><p class="eyebrow">WORK / SELECTED PROJECTS</p><h1>项目</h1><p>这里会集中展示项目的目标、过程和结果；每件作品都应说明实际做了什么，以及目前有哪些边界。</p></header>
-      <div class="page-rule page-grid">
-        <div>
-          <!-- 添加真实项目时，可为每个项目使用 article，包含标题、角色、背景、过程、结果与可公开的链接。 -->
-          <section class="empty-panel" aria-labelledby="projects-empty"><p class="eyebrow">PROJECT INDEX</p><h2 id="projects-empty">项目正在整理</h2><p>目前还没有公开的项目介绍。完成第一个案例后，这里会成为完整的项目目录。</p></section>
-        </div>
-        <aside class="support-note" aria-label="项目展示说明"><p class="eyebrow">EVIDENCE</p><h2>每个项目会说明</h2><ul><li>要解决的问题与项目背景</li><li>我的具体工作与关键决定</li><li>过程证据、结果和仍待验证之处</li></ul></aside>
-      </div>
+      <header class="page-intro"><p class="eyebrow">PROJECTS / PORTFOLIO</p><h1>从问题，到可以检查的作品。</h1><p>项目介绍会从背景、个人贡献、过程与结果展开；尚未核对的内容暂不发布。</p></header>
+      <section class="project-index" aria-label="项目目录">
+        <!-- 有真实项目后，每个项目使用 article.project-entry，并给出可公开的证据和链接。 -->
+        <article class="project-entry"><div class="project-entry-head"><span class="row-number">01</span><div><span class="repo-status">尚未发布</span><h2>代表项目待补充</h2></div></div><p>目前还没有经过核对、准备公开的项目介绍。</p><p class="project-boundary">项目背景、我的工作、过程证据与结果会在这里逐项说明。</p></article>
+      </section>
+      <p class="source-note">页面保留项目目录的结构；内容将在获得真实材料后补充。</p>
     </main>
-    <footer class="site-footer"><span>xufilps · 个人作品集</span><a href="#top">返回顶部 ↑</a></footer>
+    <footer class="site-footer"><span>© 2026 xufilps · 作品与思考</span><a href="#top">返回顶部 ↑</a></footer>
   </div>
 </body>
 </html>
