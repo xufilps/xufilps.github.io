@@ -21,3 +21,7 @@ Bring all four public pages as close as practical to the structure and spacing o
 ## Rollback and delivery
 
 Work on `feat/reference-layout-alignment`, then fast-forward `main` and push after checks using the user's standing publication request. Revert the alignment commit to restore the previous layout if needed.
+
+## Browser comment follow-up
+
+On `fix/mobile-title-and-profile-placeholders`, make the project heading break after its comma at phone widths, replace both portrait monograms with one local white image, and change the About profile fields to education, interests, and contact channels. Check phone and desktop layout, image loading in both themes, and local paths before publishing to `main`; preserve the staged plan deletion. Revert this follow-up commit to roll back these changes.

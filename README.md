@@ -14,6 +14,8 @@
 - `about/index.html`：正文介绍与资料侧栏，只填写本人确认并愿意公开的内容。
 - `styles.css`：全站视觉与响应式样式；`theme.js`：深浅主题切换；`assets/github-mark.svg`：导航中的 GitHub 图标。
 
+首页和关于页的头像使用 `assets/avatar-placeholder.svg` 纯白占位图。添加真实头像时，把图片放入 `assets/`，再更新两个页面中头像的 `src` 和 `alt`；现有样式会保持尺寸并居中裁切。
+
 现有 `notes/notes-20260930.md` 保留在仓库，未接入公开文章目录。旧版页面可从 Git 历史恢复。
 
 ## 发布
