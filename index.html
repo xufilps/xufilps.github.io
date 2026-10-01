@@ -3,26 +3,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="我的个人网站，记录正在学习、制作和留意的事。">
-  <title>首页 — 一隅</title>
+  <meta name="description" content="xufilps 的个人作品集，收录项目、写作与个人介绍。">
+  <meta name="color-scheme" content="light dark">
+  <title>首页 · xufilps</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="theme.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">跳转到正文</a>
-  <header class="site-header"><div class="site-shell header-row">
-    <a class="site-name" href="./">一隅</a>
-    <nav aria-label="主导航"><ul>
-      <li><a href="./" aria-current="page">首页</a></li><li><a href="now/">此刻</a></li><li><a href="notes/">手记</a></li><li><a href="things/">作品与收藏</a></li><li><a href="links/">链接</a></li><li><a href="about/">关于</a></li>
-    </ul></nav>
-  </div></header>
-  <main class="site-shell" id="main">
-    <div class="page-intro"><p class="eyebrow">个人主页</p><h1>你好，我是……</h1><p class="lede">这里记录我正在学习、尝试和留意的事情。</p><p class="welcome">欢迎来到我的小小角落。</p></div>
-    <section class="section"><div class="section-heading"><h2>此刻</h2><a class="text-link" href="now/">多了解一些 →</a></div><p class="prompt">最近让我投入时间和注意力的事，等我想好了再慢慢补上。</p></section>
-    <section class="section"><div class="section-heading"><h2>最近的手记</h2><a class="text-link" href="notes/">查看全部 →</a></div><p class="prompt">这里还没有手记。之后写下的新内容会出现在这里。</p></section>
-    <section class="section"><div class="section-heading"><h2>最近的作品与收藏</h2><a class="text-link" href="things/">查看全部 →</a></div><p class="prompt">这里像一张小小的展示架，收下沿途做过的东西。目前还没有内容。</p></section>
-    <section class="section"><div class="section-heading"><h2>别处</h2><a class="text-link" href="links/">我的网络地图 →</a></div><p class="prompt">等我准备好分享时，会把其他能找到我的地方放在这里。</p></section>
-    <p class="meta" style="padding-top:1.3rem">最后更新：2026 年 9 月 29 日</p>
-  </main>
-  <footer class="site-footer site-shell"><p>慢慢整理，留一隅给网络上的自己。</p><p><a href="about/">关于这里</a></p></footer>
+  <a class="skip-link" href="#main">跳至正文</a>
+  <div class="site-wrap" id="top">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="xufilps，返回首页">xufilps<span aria-hidden="true">.</span></a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="./" aria-current="page">首页</a>
+        <a href="projects/">项目</a>
+        <a href="writing/">文章</a>
+        <a href="about/">关于</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换深色模式" aria-pressed="false" hidden>深色模式</button>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="home-title">
+        <div class="hero-copy">
+          <p class="eyebrow">PERSONAL PORTFOLIO <span aria-hidden="true">/</span> 个人作品集</p>
+          <h1 id="home-title">你好，我是<br><em>xufilps。</em></h1>
+          <p class="hero-lede">这里将展示我的项目、写作与实践过程。个人介绍正在整理，内容会随着真实作品逐步完善。</p>
+          <a class="inline-link" href="about/">了解更多 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-mark" aria-hidden="true"><span>x.</span><small>作品 / 思考 / 过程</small></div>
+      </section>
+
+      <div class="home-layout">
+        <div class="home-primary">
+          <section class="home-section" aria-labelledby="projects-title">
+            <div class="section-heading"><p class="section-index">01 / WORK</p><h2 id="projects-title">代表项目</h2></div>
+            <div class="section-body">
+              <!-- 在这里加入真实的代表项目，包含项目名称、角色、过程、结果和可公开的链接。 -->
+              <div class="empty-feature"><span class="empty-symbol" aria-hidden="true">↗</span><h3>项目展示正在整理</h3><p>完成项目介绍后，这里会优先呈现一件最能说明工作过程的作品。</p></div>
+              <a class="more-link" href="projects/">查看项目页 <span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+
+          <section class="home-section" aria-labelledby="writing-title">
+            <div class="section-heading"><p class="section-index">02 / WRITING</p><h2 id="writing-title">思考记录</h2></div>
+            <div class="section-body">
+              <!-- 有已发布的文章时，在这里加入标题、日期、摘要和指向文章的链接。 -->
+              <p class="quiet-state">文章尚未发布。之后会在这里收录项目复盘、观察与仍在思考的问题。</p>
+              <a class="more-link" href="writing/">浏览文章页 <span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="home-rail" aria-label="个人资料概览">
+          <div class="rail-block"><p class="eyebrow">ABOUT</p><h2>关于我</h2><p>这里将补充我关注的方向、工作的方式，以及做这些项目的原因。</p><a class="inline-link" href="about/">阅读介绍 <span aria-hidden="true">→</span></a></div>
+          <div class="rail-block"><p class="eyebrow">CONTACT</p><h2>保持联系</h2><p>联系方式尚未公开。准备好分享时，会在关于页面提供合适的联系渠道。</p></div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer"><span>xufilps · 个人作品集</span><a href="#top">返回顶部 ↑</a></footer>
+  </div>
 </body>
 </html>

@@ -1,27 +1,40 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="关于这个网站，以及网站背后的我。">
-  <title>关于 — 一隅</title><link rel="stylesheet" href="../styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="关于 xufilps 与这个作品集。">
+  <meta name="color-scheme" content="light dark">
+  <title>关于 · xufilps</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../theme.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">跳转到正文</a>
-  <header class="site-header"><div class="site-shell header-row">
-    <a class="site-name" href="../">一隅</a><nav aria-label="主导航"><ul>
-      <li><a href="../">首页</a></li><li><a href="../now/">此刻</a></li><li><a href="../notes/">手记</a></li><li><a href="../things/">作品与收藏</a></li><li><a href="../links/">链接</a></li><li><a href="./" aria-current="page">关于</a></li>
-    </ul></nav>
-  </div></header>
-  <main class="site-shell" id="main">
-    <div class="page-intro"><p class="eyebrow">关于这里</p><h1>关于</h1><p class="lede">留几个问题，等我有空慢慢回答。这一页也可以一直留白。</p></div>
-    <ul class="about-prompts">
-      <li><strong>你是谁？</strong><span class="prompt">可以写名字、昵称，或任何你愿意分享的称呼。</span></li>
-      <li><strong>你对什么感兴趣？</strong><span class="prompt">那些你总会再次关注的话题。</span></li>
-      <li><strong>你平时会做些什么？</strong><span class="prompt">物件、图像、软件、手记，或其他任何东西。</span></li>
-      <li><strong>为什么做这个网站？</strong><span class="prompt">你希望在这里为哪些事情留出空间。</span></li>
-      <li><strong>别人怎样联系你？</strong><span class="prompt">只添加你愿意公开的联系方式，例如邮箱、GitHub、联邦宇宙、X 或其他平台。</span></li>
-    </ul>
-  </main>
-  <footer class="site-footer site-shell"><p>慢慢整理，留一隅给网络上的自己。</p><p><a href="../">返回首页</a></p></footer>
+  <a class="skip-link" href="#main">跳至正文</a>
+  <div class="site-wrap" id="top">
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="xufilps，返回首页">xufilps<span aria-hidden="true">.</span></a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="../">首页</a>
+        <a href="../projects/">项目</a>
+        <a href="../writing/">文章</a>
+        <a href="./" aria-current="page">关于</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换深色模式" aria-pressed="false" hidden>深色模式</button>
+    </header>
+    <main id="main">
+      <header class="page-intro"><p class="eyebrow">ABOUT / XUFILPS</p><h1>关于</h1><p>这一页会逐步补充我是谁、关注什么，以及希望通过作品传达的判断。</p></header>
+      <div class="page-rule page-grid">
+        <div>
+          <!-- 在取得本人确认后，用真实简介替换下面的空状态；不要从仓库名称推测身份或经历。 -->
+          <section class="content-block" aria-labelledby="bio-title"><p class="eyebrow">01 / INTRODUCTION</p><h2 id="bio-title">个人介绍</h2><p>个人经历与当前方向尚未补充。这里会介绍与作品有关的背景，而不是一份没有依据的履历。</p></section>
+          <section class="content-block" aria-labelledby="practice-title"><p class="eyebrow">02 / PRACTICE</p><h2 id="practice-title">关注与实践</h2><p>这里会说明我关心的问题、常用的方法，以及项目中形成的具体判断。</p></section>
+          <section class="content-block" aria-labelledby="contact-title"><p class="eyebrow">03 / CONTACT</p><h2 id="contact-title">联系</h2><p>公开联系方式尚未添加。准备好分享时，可以在这里放入邮箱或其他愿意公开的渠道。</p></section>
+        </div>
+        <aside class="support-note" aria-label="页面说明"><p class="eyebrow">PROFILE</p><h2>持续完善</h2><p>网站先搭好结构，个人资料会在确认后逐项加入；未公开的信息将保持空白。</p></aside>
+      </div>
+    </main>
+    <footer class="site-footer"><span>xufilps · 个人作品集</span><a href="#top">返回顶部 ↑</a></footer>
+  </div>
 </body>
 </html>
