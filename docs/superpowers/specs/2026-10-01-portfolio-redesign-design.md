@@ -2,7 +2,7 @@
 
 ## Goal
 
-Turn the site into a complete portfolio structure inspired by the editorial hierarchy of `lizaixi01.github.io`. The design uses no personal claims, projects, articles, photos, or contact details that the owner has not supplied.
+Turn the site into a complete portfolio structure for `xufilps`, with clear routes to projects, writing, and personal information. The design uses no personal claims, projects, articles, photos, or contact details that the owner has not supplied.
 
 ## Information architecture
 
