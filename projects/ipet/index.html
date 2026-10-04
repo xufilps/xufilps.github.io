@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="从 Windows VPet 到原生 Apple
+应用：软件迁移、交互重构与 AI 协作开发的项目记录。">
+  <meta name="color-scheme" content="light dark">
+  <meta name="apple-mobile-web-app-title" content="xufilps">
+  <link rel="icon" href="../../assets/site-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" sizes="180x180">
+  <title>iPet：把 Windows 桌宠重做成原生 Apple 应用 · xufilps</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="../../theme.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至正文</a>
+  <div class="site-shell" id="top">
+    <header class="site-header">
+      <a class="brand" href="../../">Home · xufilps</a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="../../">首页</a>
+        <a href="../../writing/">文章</a>
+        <a href="../" aria-current="page">项目</a>
+        <a href="../../about/">关于</a>
+      </nav>
+      <a class="github-nav" href="https://github.com/xufilps" target="_blank" rel="noopener noreferrer" aria-label="xufilps 的 GitHub 主页">GitHub ↗</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="切换至深色模式" aria-pressed="false" hidden>◐ 深色</button>
+    </header>
+    <main id="main" class="article-page">
+      <header class="page-intro article-intro">
+        <p class="eyebrow">项目 / 技术探索</p>
+        <h1>iPet：把 Windows 桌宠重做成原生 Apple 应用</h1>
+        <p class="article-meta">持续开发 · macOS / iOS / iPadOS · Swift / AppKit / SpriteKit / SwiftUI</p>
+      </header>
+      <article class="article-body">
+        <details class="project-toc">
+          <summary>文章目录 · 14 个章节</summary>
+          <nav aria-label="文章目录">
+<ul>
+<li><a href="#01-从-fork-开始" id="toc-01-从-fork-开始">01. 从 Fork
+开始</a></li>
+<li><a href="#02-第一个问题不能移植只能重新实现"
+id="toc-02-第一个问题不能移植只能重新实现">02.
+第一个问题：不能“移植”，只能重新实现</a></li>
+<li><a href="#03-先搭一个能活起来的桌宠"
+id="toc-03-先搭一个能活起来的桌宠">03. 先搭一个能活起来的桌宠</a></li>
+<li><a href="#04-动画资源并不是直接全部塞进去"
+id="toc-04-动画资源并不是直接全部塞进去">04.
+动画资源并不是直接全部塞进去</a></li>
+<li><a href="#05-从会动变成真正的养成系统"
+id="toc-05-从会动变成真正的养成系统">05.
+从“会动”变成真正的养成系统</a></li>
+<li><a href="#06-桌宠最复杂的部分其实是状态"
+id="toc-06-桌宠最复杂的部分其实是状态">06.
+桌宠最复杂的部分其实是“状态”</a></li>
+<li><a href="#07-一点一点恢复原版行为"
+id="toc-07-一点一点恢复原版行为">07. 一点一点恢复原版行为</a></li>
+<li><a href="#08-存档是另一个独立系统"
+id="toc-08-存档是另一个独立系统">08. 存档是另一个独立系统</a></li>
+<li><a href="#09-尝试理解-windows-原版存档"
+id="toc-09-尝试理解-windows-原版存档">09. 尝试理解 Windows
+原版存档</a></li>
+<li><a href="#10-从-macos-继续走向-iphone-和-ipad"
+id="toc-10-从-macos-继续走向-iphone-和-ipad">10. 从 macOS 继续走向
+iPhone 和 iPad</a></li>
+<li><a href="#11-项目的开发方式也发生了变化"
+id="toc-11-项目的开发方式也发生了变化">11.
+项目的开发方式也发生了变化</a></li>
+<li><a href="#12-git-也从上传代码变成了工程的一部分"
+id="toc-12-git-也从上传代码变成了工程的一部分">12. Git
+也从“上传代码”变成了工程的一部分</a></li>
+<li><a href="#13-当前的-ipet" id="toc-13-当前的-ipet">13. 当前的
+iPet</a></li>
+<li><a href="#14-我从这个项目里学到的东西"
+id="toc-14-我从这个项目里学到的东西">14.
+我从这个项目里学到的东西</a></li>
+</ul>
+          </nav>
+        </details>
+<p>iPet 是一个基于开源项目 <a
+href="https://github.com/LorisYounger/VPet">VPet</a> 的 Apple
+平台原生桌宠项目。</p>
+<p>项目最开始的目标其实很简单：<strong>VPet 原本主要运行在 Windows
+上，我想尝试把这套桌宠体验带到 macOS。</strong></p>
+<p>但真正开始做之后，我很快发现，这并不是一次简单的“跨平台编译”。</p>
+<p>原项目建立在 C#、WPF 和 Windows 生态之上，而 macOS
+有完全不同的窗口系统、输入机制、图形框架和应用生命周期。如果希望最终得到的是一个真正符合
+macOS
+使用习惯的应用，就不能只是在外面套一层兼容壳，而需要重新理解原项目的行为，再用
+Apple 平台自己的技术重新实现。</p>
+<p>于是，iPet
+逐渐变成了一次完整的<strong>软件迁移、重构和产品化实验</strong>。</p>
+<hr />
+<h2 id="01-从-fork-开始">01. 从 Fork 开始</h2>
+<p>项目最初直接 Fork 自 VPet：</p>
+<pre class="text"><code>LorisYounger/VPet
+        ↓ Fork
+xufilps/iPet</code></pre>
+<p>一开始我对 Git 的协作模型还不熟悉，直接在 Fork 仓库的
+<code>main</code> 分支上进行了开发。</p>
+<p>随着修改越来越多，一个问题逐渐显现出来：</p>
+<p><strong>我的 iPet 和上游 VPet
+已经开始承担两个完全不同的角色。</strong></p>
+<p>VPet 仍然在继续更新，而 iPet 已经逐渐变成一个独立的 Apple
+平台实现。如果继续把自己的大量修改直接堆在 <code>main</code>
+上，以后同步上游、比较差异和维护项目都会越来越困难。</p>
+<p>因此后来重新整理了 Git 结构：</p>
+<pre class="text"><code>upstream/main
+    ↓
+原版 VPet
+
+origin/main
+    ↓
+跟踪 / 同步上游
+
+origin/ipet-dev
+    ↓
+iPet 实际开发</code></pre>
+<p>现在仓库默认展示的也是 <code>ipet-dev</code>。</p>
+<p>这个过程让我第一次真正理解了 Fork、Remote、Branch 和 Pull Request
+之间的关系。</p>
+<p>以前 Git 对我来说更多是：</p>
+<pre class="text"><code>add
+commit
+push</code></pre>
+<p>而在 iPet 里，我开始真正理解：</p>
+<pre class="text"><code>origin
+upstream
+branch
+merge
+PR
+worktree</code></pre>
+<p>这些工具为什么会存在。</p>
+<hr />
+<h2 id="02-第一个问题不能移植只能重新实现">02.
+第一个问题：不能“移植”，只能重新实现</h2>
+<p>VPet 原版依赖的是 Windows 技术栈，而 iPet 最终采用：</p>
+<pre class="text"><code>Swift 6
+
+AppKit
+→ macOS 桌面窗口与系统交互
+
+SpriteKit
+→ 桌宠动画与渲染
+
+SwiftUI
+→ 状态、活动、商店、背包、设置等功能界面</code></pre>
+<p>这意味着原来的 C# 界面代码无法直接复用。</p>
+<p>真正能够继承的主要是三类东西：</p>
+<pre class="text"><code>原项目行为逻辑
+原始动画与图片资源
+原始数据与配置</code></pre>
+<p>然后重新实现为：</p>
+<pre class="text"><code>VPet 行为
+    ↓ 理解
+
+平台无关的数据 / 规则
+    ↓ 重建
+
+Swift Core
+    ↓
+
+AppKit / SpriteKit / SwiftUI</code></pre>
+<p>因此 iPet 从一开始实际上就是一次 <strong>native
+reimplementation</strong>。</p>
+<p>我需要回答的不是：</p>
+<blockquote>
+<p>这段 C# 怎么翻译成 Swift？</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p>原程序到底在做什么？</p>
+</blockquote>
+<p>例如“摸头”看起来只是一个简单交互，但继续往下拆就会涉及：</p>
+<pre class="text"><code>鼠标位置
+→ 点击区域判断
+→ PNG Alpha 判断
+→ 当前动作状态
+→ 动画切换
+→ 心情 / 好感变化
+→ 消息反馈
+→ 存档更新</code></pre>
+<p>当系统被拆开以后，很多原本看似简单的功能才真正显现出复杂度。</p>
+<hr />
+<h2 id="03-先搭一个能活起来的桌宠">03. 先搭一个能活起来的桌宠</h2>
+<p>第一阶段的目标不是追求功能完整，而是先建立最基本的运行骨架：</p>
+<pre class="text"><code>透明窗口
+    ↓
+角色显示
+    ↓
+Sprite 动画
+    ↓
+鼠标穿透
+    ↓
+点击与拖动
+    ↓
+基础状态
+    ↓
+本地存档</code></pre>
+<p>最初的 macOS 版本已经可以做到：</p>
+<ul>
+<li>在桌面显示透明角色</li>
+<li>播放原始逐帧动画</li>
+<li>根据图片 Alpha 判断实际角色区域</li>
+<li>让透明区域继续点击下面的窗口</li>
+<li>抚摸角色</li>
+<li>长按、拖动和提起角色</li>
+<li>隐藏与重新显示</li>
+<li>保存位置和基础养成状态</li>
+</ul>
+<p>其中一个很有代表性的问题就是<strong>透明窗口的点击穿透</strong>。</p>
+<p>一个桌宠窗口虽然视觉上只有角色，但从系统角度看，实际上仍然是一个完整矩形：</p>
+<pre class="text"><code>┌─────────────────┐
+│                 │
+│      Pet        │
+│                 │
+└─────────────────┘</code></pre>
+<p>如果什么都不处理，整个矩形都会截获鼠标。</p>
+<p>因此 iPet 需要进一步判断 PNG 当前像素的 Alpha：</p>
+<pre class="text"><code>鼠标位置
+    ↓
+转换到 Sprite 坐标
+    ↓
+读取对应像素 Alpha
+    ↓
+角色区域 → 接收交互
+透明区域 → 让事件穿透</code></pre>
+<p>这也是我第一次意识到：</p>
+<p><strong>“看起来正确”和“系统行为正确”完全是两件事情。</strong></p>
+<hr />
+<h2 id="04-动画资源并不是直接全部塞进去">04.
+动画资源并不是直接全部塞进去</h2>
+<p>VPet 自带大量角色动画。</p>
+<p>如果只是把所有 PNG
+原封不动装进应用，不仅项目体积会很大，资源组织、加载和维护都会变得非常混乱。</p>
+<p>因此项目后来建立了一套资源转换流程：</p>
+<pre class="text"><code>VPet 原始资源
+      ↓
+解析配置
+      ↓
+筛选当前需要的动作
+      ↓
+生成标准资源描述
+      ↓
+复制对应 PNG
+      ↓
+iPet Runtime</code></pre>
+<p>应用运行时不需要理解完整的原始 LinePutScript
+配置，而是读取已经转换好的资源。</p>
+<p>同时还做了：</p>
+<ul>
+<li>PNG 有效性检查</li>
+<li>帧顺序整理</li>
+<li>动画阶段划分</li>
+<li>原文件 Hash 校验</li>
+<li>按需纹理加载</li>
+<li>纹理缓存限制</li>
+<li>重复转换避免无意义写盘</li>
+</ul>
+<p>后来随着功能逐渐恢复，动画也从最初几十组扩展到了超过一百组动作、Graph
+和状态组合。</p>
+<p>这部分工作让我第一次接触到一个很实际的工程问题：</p>
+<blockquote>
+<p><strong>软件不仅需要“能运行”，还必须考虑资源从哪里来、怎样生成、怎样验证，以及未来怎样重新生成。</strong></p>
+</blockquote>
+<hr />
+<h2 id="05-从会动变成真正的养成系统">05. 从“会动”变成真正的养成系统</h2>
+<p>只有动画的桌宠其实仍然只是一个动态 Widget。</p>
+<p>第二个重要阶段，是把 VPet 的养成系统逐渐重新建立起来。</p>
+<p>iPet 中逐步加入：</p>
+<pre class="text"><code>体力
+饱腹
+口渴
+心情
+健康
+好感
+
+经验
+等级
+等级突破
+金币</code></pre>
+<p>随后又加入：</p>
+<pre class="text"><code>工作
+学习
+娱乐
+
+商店
+物品
+食物
+药品
+背包</code></pre>
+<p>以及活动收益、等级限制、连续食用衰减、库存参数、统计等规则。</p>
+<p>这一阶段最大的变化，是项目开始从：</p>
+<pre class="text"><code>Pet Animation</code></pre>
+<p>变成：</p>
+<pre class="text"><code>Pet Simulation</code></pre>
+<p>角色不再只是随机播放动作，而是拥有一个持续运行的内部状态。</p>
+<hr />
+<h2 id="06-桌宠最复杂的部分其实是状态">06.
+桌宠最复杂的部分其实是“状态”</h2>
+<p>随着功能增加，真正困难的地方逐渐从 UI 和动画转移到了状态管理。</p>
+<p>比如：</p>
+<pre class="text"><code>正在工作
+正在睡觉
+正在被拖动
+正在吃东西
+正在说话
+正在播放特殊动画
+正在升级</code></pre>
+<p>这些状态不能随意互相覆盖。</p>
+<p>例如角色正在吃东西时突然触发升级：</p>
+<pre class="text"><code>升级发生
+↓
+显示升级消息
+↓
+升级动画进入等待队列
+↓
+当前进食动画结束
+↓
+播放升级动画
+↓
+恢复正常状态</code></pre>
+<p>类似的问题还有：</p>
+<ul>
+<li>拖动时是否允许自主移动</li>
+<li>隐藏后是否继续养成</li>
+<li>系统睡眠期间是否结算活动</li>
+<li>暂停活动后计时如何恢复</li>
+<li>动画被新动作打断时如何清理</li>
+<li>屏幕切换后角色如何避免跑出可见区域</li>
+</ul>
+<p>这让我逐渐理解：</p>
+<p><strong>交互软件真正难维护的往往不是页面，而是页面背后的状态和生命周期。</strong></p>
+<hr />
+<h2 id="07-一点一点恢复原版行为">07. 一点一点恢复原版行为</h2>
+<p>在核心系统稳定以后，项目进入了很长一段“行为还原”阶段。</p>
+<p>很多功能都是一个一个对照原版实现：</p>
+<pre class="text"><code>自主待机
+自主移动
+特殊待机
+边缘动作
+
+移动范围
+多屏幕位置保护
+
+桌宠工具栏
+活动菜单
+活动计时器
+
+说话气泡
+逐字显示
+消息停留
+长文本
+消息关闭 / 复制
+
+选择式对话
+
+升级提示
+升级动画</code></pre>
+<p>其中有不少功能第一次实现后仍然会在真实使用中暴露问题。</p>
+<p>例如工具栏中的活动菜单最初采用多级菜单结构，在实际测试时出现无法正常展开的问题。后来重新设计成单层的：</p>
+<pre class="text"><code>活动
+
+工作
+ ├─ …
+ └─ …
+
+学习
+ ├─ …
+ └─ …
+
+娱乐
+ ├─ …
+ └─ …</code></pre>
+<p>重新验收以后才真正稳定下来。</p>
+<p>这也是整个项目逐渐形成的一套工作方式：</p>
+<pre class="text"><code>查原实现
+ ↓
+写规格
+ ↓
+实现
+ ↓
+自动测试
+ ↓
+真实运行
+ ↓
+发现问题
+ ↓
+修复
+ ↓
+重新验证</code></pre>
+<p>而不是简单地：</p>
+<pre class="text"><code>写完代码 → 完成</code></pre>
+<hr />
+<h2 id="08-存档是另一个独立系统">08. 存档是另一个独立系统</h2>
+<p>当程序开始拥有真正的养成状态以后，存档很快成为一个必须认真处理的问题。</p>
+<p>iPet 使用版本化 JSON 存档。</p>
+<p>随着数据结构不断变化，存档也经历了多个版本，当前已经发展到 JSON
+v9。</p>
+<p>升级时不能简单覆盖旧文件，而需要考虑：</p>
+<pre class="text"><code>旧版本
+  ↓
+验证
+  ↓
+迁移
+  ↓
+保留升级前原件
+  ↓
+写入新版本</code></pre>
+<p>同时还需要处理：</p>
+<ul>
+<li>主存档损坏</li>
+<li>Previous Backup</li>
+<li>未来版本存档</li>
+<li>写入失败</li>
+<li>非法数据</li>
+<li>数据大小限制</li>
+<li>升级回滚</li>
+</ul>
+<p>其中一个很重要的规则是：</p>
+<blockquote>
+<p>如果程序发现这是自己无法理解的未来版本存档，就停止覆盖写入。</p>
+</blockquote>
+<p>否则一个旧版本程序可能仅仅因为“不认识新字段”，就把用户的新存档覆盖掉。</p>
+<p>这类问题让我开始接触到真正的软件数据兼容问题。</p>
+<hr />
+<h2 id="09-尝试理解-windows-原版存档">09. 尝试理解 Windows 原版存档</h2>
+<p>之后项目又向前走了一步：</p>
+<p><strong>能不能读取原 Windows VPet 的存档？</strong></p>
+<p>这件事比想象中复杂得多。</p>
+<p>原版存档使用 LinePutScript，并且存在：</p>
+<pre class="text"><code>固定点数值
+普通浮点数
+Int32 / Int64
+重复字段
+Inventory
+Statistics
+Data
+Hash</code></pre>
+<p>甚至不同字段的数字编码规则都不完全相同。</p>
+<p>因此这里没有直接做：</p>
+<pre class="text"><code>Windows Save
+→
+iPet Save</code></pre>
+<p>而是采用了一条更谨慎的路线：</p>
+<pre class="text"><code>读取
+ ↓
+解析
+ ↓
+验证
+ ↓
+生成 Preview
+ ↓
+显示不兼容项
+ ↓
+确认
+ ↓
+未来再允许写入</code></pre>
+<p>目前已经能够只读分析宠物属性、库存、统计和部分 Hash，但完整 Windows
+整档导入仍然没有开放。</p>
+<p>相比“尽快让它能导入”，我更希望这里优先保证：</p>
+<p><strong>不知道的东西就明确说不知道，而不是猜。</strong></p>
+<hr />
+<h2 id="10-从-macos-继续走向-iphone-和-ipad">10. 从 macOS 继续走向
+iPhone 和 iPad</h2>
+<p>项目最初只准备做 macOS。</p>
+<p>但随着核心逻辑逐渐从界面中抽离：</p>
+<pre class="text"><code>PetCore
+PetRendering
+PetMacInput</code></pre>
+<p>我发现其中相当一部分规则已经可以跨平台共享。</p>
+<p>于是 iPet 又增加了 iOS / iPadOS 应用。</p>
+<p>不过手机上的桌宠不可能像 macOS 一样漂浮在其他应用上，所以 iOS
+没有直接复制桌面交互方式，而是重新设计成：</p>
+<blockquote>
+<p><strong>应用内养宠。</strong></p>
+</blockquote>
+<p>共享：</p>
+<pre class="text"><code>养成
+经济
+活动
+物品
+存档</code></pre>
+<p>重新实现：</p>
+<pre class="text"><code>iOS UI
+触摸交互
+页面导航
+应用生命周期</code></pre>
+<p>目前已经有养宠、活动、商店、背包和设置等页面，并采用 Apple
+原生界面体系。</p>
+<p>这一步也让我更加理解所谓的“跨平台”：</p>
+<blockquote>
+<p>跨平台不一定意味着每个平台长得一样，而是决定什么应该共享，什么应该尊重平台本身。</p>
+</blockquote>
+<hr />
+<h2 id="11-项目的开发方式也发生了变化">11.
+项目的开发方式也发生了变化</h2>
+<p>iPet 对我来说还有一个比较特别的地方：</p>
+<p>这是一个大量使用 AI 辅助开发的项目。</p>
+<p>我主要负责：</p>
+<pre class="text"><code>定义目标
+决定产品范围
+提出行为要求
+体验应用
+发现问题
+进行真实验收
+决定取舍</code></pre>
+<p>而 Codex 参与了大量：</p>
+<pre class="text"><code>代码阅读
+原版行为分析
+Swift 实现
+测试编写
+文档维护
+代码审查
+问题修复</code></pre>
+<p>这也让我逐渐形成了一种新的开发方式。</p>
+<p>不是：</p>
+<pre class="text"><code>我描述一个软件
+↓
+AI 一次把它生成出来</code></pre>
+<p>而更像：</p>
+<pre class="text"><code>我定义一个阶段
+ ↓
+分析现有系统
+ ↓
+形成规格
+ ↓
+实现
+ ↓
+自动测试
+ ↓
+我进行真实体验
+ ↓
+发现新的问题
+ ↓
+继续下一轮</code></pre>
+<p>随着项目变大，单靠聊天记录已经无法维持上下文，因此仓库里逐渐出现了：</p>
+<pre class="text"><code>ROADMAP
+HANDOFF
+规格文档
+行为对照表
+上游差异矩阵
+验收记录</code></pre>
+<p>这些文档实际上成为了项目的长期记忆。</p>
+<p>AI 负责执行大量工作，而
+Git、文档、测试和规格负责让这些工作保持连续。</p>
+<hr />
+<h2 id="12-git-也从上传代码变成了工程的一部分">12. Git
+也从“上传代码”变成了工程的一部分</h2>
+<p>iPet 最开始让我真正开始使用 Git，并不仅仅是把代码上传到 GitHub。</p>
+<p>后来逐渐形成：</p>
+<pre class="text"><code>upstream
+  │
+  └── VPet 原项目
+
+origin/main
+  │
+  └── 上游基线
+
+origin/ipet-dev
+  │
+  └── iPet 开发</code></pre>
+<p>如果需要同时处理不同分支，还可以使用 Git Worktree：</p>
+<pre class="text"><code>iPet/
+      → ipet-dev
+
+iPet-main/
+      → main
+
+iPet-feature/
+      → feature/...</code></pre>
+<p>不同开发任务拥有各自的工作目录，而不是不断在一个目录里 checkout 来
+checkout 去。</p>
+<p>这是一个很小的变化，但也是我从“会使用 Git
+命令”走向“开始理解版本控制工作流”的过程。</p>
+<hr />
+<h2 id="13-当前的-ipet">13. 当前的 iPet</h2>
+<p>截至目前，iPet 已经不是最初那个“让角色在 Mac 上动起来”的实验。</p>
+<p>它已经包含：</p>
+<pre class="text"><code>macOS 原生透明桌宠
+
+SpriteKit 动画系统
+
+完整基础养成
+
+工作 / 学习 / 娱乐活动
+
+商店与背包
+
+状态、统计与设置界面
+
+自主行为与移动
+
+消息与选择式对话
+
+版本化本地存档
+
+备份与恢复
+
+Windows 存档兼容研究
+
+iPhone / iPad 应用</code></pre>
+<p>当前开发版本为 <strong>v0.2.0</strong>。</p>
+<p>项目使用 Swift 6，当前主要面向 macOS 26、iOS 26 和 iPadOS 26。</p>
+<p>自动验证已经覆盖数百项 Swift 测试以及额外的
+Python、构建、资源和签名检查。</p>
+<p>但它仍然不是一个“已经完成”的项目。</p>
+<p>目前仍然存在：</p>
+<ul>
+<li>长时间真实运行测试</li>
+<li>多显示器与系统睡眠完整验收</li>
+<li>部分原版动画和界面行为</li>
+<li>Windows 整档正式导入</li>
+<li>iOS 真机完整验证</li>
+<li>正式 Developer ID 签名、公证与发行</li>
+</ul>
+<p>等工作。</p>
+<p>我更愿意把现在的 iPet 看成一个仍然持续演化的工程。</p>
+<hr />
+<h2 id="14-我从这个项目里学到的东西">14. 我从这个项目里学到的东西</h2>
+<p>最开始做 iPet 时，我关注的问题可能只是：</p>
+<blockquote>
+<p>怎么让一个 Windows 桌宠跑在 Mac 上？</p>
+</blockquote>
+<p>但做到后面，我实际接触到的东西已经远远超过 Swift 本身：</p>
+<pre class="text"><code>Git / GitHub
+分支与上游管理
+
+应用架构
+模块划分
+
+GUI 与事件系统
+
+动画资源管线
+
+状态机
+
+持久化与数据迁移
+
+兼容性
+
+自动测试
+
+真实设备验收
+
+许可证与开源合规
+
+项目文档
+
+AI 协作开发</code></pre>
+<p>它让我越来越明显地意识到：</p>
+<p><strong>真正的软件工程不是“把功能写出来”，而是建立一套让功能能够持续存在、验证、修改和演进的系统。</strong></p>
+<p>很多第一次接触时觉得多余的东西——分支、测试、规格、迁移、回滚、验收、文档——往往恰恰是在项目变大以后最重要的部分。</p>
+<p>所以对我来说，iPet 的意义并不仅仅是做出了一个桌宠。</p>
+<p>它更像是我第一次真正把一个已有的大型开源项目拆开、理解，再重新构造成属于自己的产品。</p>
+<hr />
+<p><strong>Project</strong></p>
+<p>iPet<br />
+Native VPet implementation for Apple platforms</p>
+<p><strong>Tech</strong></p>
+<p>Swift · AppKit · SpriteKit · SwiftUI · Git · GitHub</p>
+<p><strong>Platform</strong></p>
+<p>macOS · iOS · iPadOS</p>
+<p><strong>Repository</strong></p>
+<p><a
+href="https://github.com/xufilps/iPet">https://github.com/xufilps/iPet</a></p>
+<p><strong>Upstream</strong></p>
+<p>VPet / LorisYounger<br />
+<a
+href="https://github.com/LorisYounger/VPet">https://github.com/LorisYounger/VPet</a></p>
+      </article>
+      <a class="article-back" href="../">← 返回项目目录</a>
+    </main>
+    <footer class="site-footer"><span>© 2026 xufilps · 作品与思考</span><a href="#top">返回顶部 ↑</a></footer>
+  </div>
+</body>
+</html>

@@ -32,3 +32,13 @@ pandoc writing/_drafts/my-first-post.md --standalone --template=writing/_templat
 ## 发布
 
 GitHub Pages 从 `main` 分支的仓库根目录发布。改动先在功能分支预览和检查，再合并到 `main`；增加个人项目、文章、图片或联系信息时，发布前核对内容与公开权限。
+
+## 项目记录
+
+iPet 项目详情页位于 `/projects/ipet/`，原始 Markdown 副本保存在 `projects/ipet/source.md`。修改正文后，在仓库根目录重新生成：
+
+```sh
+tail -n +2 projects/ipet/source.md | pandoc --from=gfm --standalone --toc --toc-depth=2 --metadata title='iPet：把 Windows 桌宠重做成原生 Apple 应用' --metadata description='从 Windows VPet 到原生 Apple 应用：软件迁移、交互重构与 AI 协作开发的项目记录。' --template=projects/_templates/project.html -o projects/ipet/index.html
+```
+
+第一行 Markdown 标题由页面模板统一呈现；正文保留原文，文章目录自动生成。项目列表和首页入口需单独维护。
