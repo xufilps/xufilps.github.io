@@ -33,6 +33,14 @@ $endif$  <meta name="color-scheme" content="light dark">
 $if(date)$        <p class="article-meta"><time datetime="$date$">$date$</time></p>
 $endif$      </header>
       <article class="article-body">
+$if(toc)$
+        <details class="project-toc">
+          <summary>文章目录</summary>
+          <nav aria-label="文章目录">
+$toc$
+          </nav>
+        </details>
+$endif$
 $body$
       </article>
       <a class="article-back" href="../">← 返回文章目录</a>

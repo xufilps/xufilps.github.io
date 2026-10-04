@@ -42,3 +42,11 @@ python3 projects/ipet/render.py
 ```
 
 生成脚本将原文开头两行标题合并为页面主标题，并将编号章节规范为二级标题；正文保留原文，文章目录自动生成。项目列表和首页入口需单独维护。
+
+## iPet 工程实践文章
+
+工程文章位于 `/writing/ipet-native-apple/`，与项目栏目中的设计案例分别维护。原文副本保存在 `writing/ipet-native-apple/source.md`，网站发布日期为 2026-10-04。重新生成：
+
+```sh
+tail -n +2 writing/ipet-native-apple/source.md | pandoc --from=gfm --standalone --toc --toc-depth=2 --metadata title='iPet：把 Windows 桌宠重做成原生 Apple 应用' --metadata description='从 Windows VPet 到原生 Apple 应用：软件迁移、交互重构与 AI 协作开发的实践记录。' --metadata category='工程实践' --metadata date='2026-10-04' --template=writing/_templates/post.html -o writing/ipet-native-apple/index.html
+```
