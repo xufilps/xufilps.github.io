@@ -205,3 +205,6 @@ main { min-height: 65vh; padding-top: 32px; }
 .project-toc nav { margin-top: 14px; }
 .project-toc ul { padding-left: 1.4em; }
 .project-toc nav > ul { margin-bottom: 0; }
+
+.software-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.software-list li { padding: 5px 12px; border: 1px solid var(--line); border-radius: 3px; font-size: .875rem; line-height: 1.8; }
