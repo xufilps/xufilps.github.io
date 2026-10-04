@@ -38,7 +38,7 @@ GitHub Pages 从 `main` 分支的仓库根目录发布。改动先在功能分�
 iPet 项目详情页位于 `/projects/ipet/`，原始 Markdown 副本保存在 `projects/ipet/source.md`。修改正文后，在仓库根目录重新生成：
 
 ```sh
-tail -n +2 projects/ipet/source.md | pandoc --from=gfm --standalone --toc --toc-depth=2 --metadata title='iPet：把 Windows 桌宠重做成原生 Apple 应用' --metadata description='从 Windows VPet 到原生 Apple 应用：软件迁移、交互重构与 AI 协作开发的项目记录。' --template=projects/_templates/project.html -o projects/ipet/index.html
+python3 projects/ipet/render.py
 ```
 
-第一行 Markdown 标题由页面模板统一呈现；正文保留原文，文章目录自动生成。项目列表和首页入口需单独维护。
+生成脚本将原文开头两行标题合并为页面主标题，并将编号章节规范为二级标题；正文保留原文，文章目录自动生成。项目列表和首页入口需单独维护。
