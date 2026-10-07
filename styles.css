@@ -208,3 +208,8 @@ main { min-height: 65vh; padding-top: 32px; }
 
 .software-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .software-list li { padding: 5px 12px; border: 1px solid var(--line); border-radius: 3px; font-size: .875rem; line-height: 1.8; }
+
+.article-body img { max-height: 780px; width: auto; }
+.article-body table { display: block; max-width: 100%; overflow-x: auto; margin: 0 0 1.4em; border-collapse: collapse; font-size: .9375rem; }
+.article-body th, .article-body td { padding: 10px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.article-body th { background: var(--soft); }

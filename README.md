@@ -50,3 +50,13 @@ python3 projects/ipet/render.py
 ```sh
 tail -n +2 writing/ipet-native-apple/source.md | pandoc --from=gfm --standalone --toc --toc-depth=2 --metadata title='iPet：把 Windows 桌宠重做成原生 Apple 应用' --metadata description='从 Windows VPet 到原生 Apple 应用：软件迁移、交互重构与 AI 协作开发的实践记录。' --metadata category='工程实践' --metadata date='2026-10-04' --template=writing/_templates/post.html -o writing/ipet-native-apple/index.html
 ```
+
+## EasyLife 项目记录
+
+项目页位于 `/projects/easylife/`。原文在 `projects/easylife/source.md`，四张截图保存在同目录的 `assets/EasyLife-2026-10-07-v1/`，保留原始文件名。更新后重新生成：
+
+```sh
+python3 projects/easylife/render.py
+```
+
+文章记录的是 2026-10-07 的可运行原型阶段，尚未开展目标老年用户验证。
